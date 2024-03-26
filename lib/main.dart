@@ -63,15 +63,21 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           centerTitle: true,
           titleTextStyle: TextStyle(
-            fontSize: 24,
-            color: Colors.black,
-            fontFamily: 'MyFont'
-          ),
+              fontSize: 24, color: Colors.black, fontFamily: 'MyFont'),
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
       ),
+      builder: (context, child) => _unFocusWrapper(child),
       home: const SplashScreen(),
+    );
+  }
+
+  Widget _unFocusWrapper(Widget? child) {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: child,
     );
   }
 }

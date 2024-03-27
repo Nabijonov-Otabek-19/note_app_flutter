@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 150,
                     ),
                   )
-                : buildNotes(),
+                : _buildNotes(),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blueAccent,
@@ -76,9 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget buildNotes() => StaggeredGrid.count(
-      // itemCount: notes.length,
-      // staggeredTileBuilder: (index) => StaggeredTile.fit(2),
+  Widget _buildNotes() => StaggeredGrid.count(
       crossAxisCount: 2,
       mainAxisSpacing: 2,
       crossAxisSpacing: 2,
@@ -91,9 +89,11 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisCellCount: 1,
             child: GestureDetector(
               onTap: () async {
-                await Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => NoteDetailPage(noteId: note.id!),
-                ));
+                await Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => NoteDetailPage(noteId: note.id!),
+                  ),
+                );
 
                 refreshNotes();
               },

@@ -20,19 +20,22 @@ Future<void> main() async {
         appBar: AppBar(
           title: const Text("Error"),
         ),
-        body: Center(
+        body: SingleChildScrollView(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.max,
             children: [
               const Icon(
                 Icons.error_outline_rounded,
                 color: Colors.red,
                 size: 100,
               ),
-              Text(
-                kReleaseMode
-                    ? "Oops... something went wrong"
-                    : errorDetails.exception.toString(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  kReleaseMode
+                      ? "Oops... something went wrong"
+                      : errorDetails.exception.toString(),
+                ),
               ),
             ],
           ),
@@ -63,7 +66,10 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           centerTitle: true,
           titleTextStyle: TextStyle(
-              fontSize: 24, color: Colors.black, fontFamily: 'MyFont'),
+            fontSize: 24,
+            color: Colors.black,
+            fontFamily: 'MyFont',
+          ),
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),

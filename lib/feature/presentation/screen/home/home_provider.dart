@@ -4,7 +4,9 @@ import 'package:todo_app_sqflite/feature/data/model/note_model.dart';
 
 class HomeProvider extends ChangeNotifier {
   final NotesDatabase helper = NotesDatabase.instance;
+
   final BuildContext context;
+  late List<NoteModel> notes;
   bool isLoading = false;
 
   HomeProvider(this.context);
@@ -14,22 +16,22 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> createItem(NoteModel newItem) async {
+  Future<void> createNote(NoteModel newItem) async {
     await helper.create(newItem);
     notifyListeners();
   }
 
-  Future<List<NoteModel>> getAllTodo() async {
+  Future<List<NoteModel>> refreshAllNotes() async {
     return await helper.readAllNotes();
   }
 
-  Future<void> updateItem(int itemKey, NoteModel item) async {
+  Future<void> updateNote(NoteModel item) async {
     await helper.update(item);
     notifyListeners();
   }
 
-  Future<void> deleteItem(int itemKey, bool mounted) async {
-    await helper.delete(itemKey);
+  Future<void> deleteNote(int id, bool mounted) async {
+    await helper.delete(id);
     notifyListeners();
 
     if (!mounted) return;
